@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_cardshit_levels",
+  "info": {
+    "name": "Level",
+    "icon": "user-injured"
+  },
+  "options": {},
+  "attributes": {
+    "slots": {
+      "type": "component",
+      "repeatable": true,
+      "component": "cardshit.slot",
+      "required": true,
+      "min": 1
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_cardshit_upgrades",
+  "info": {
+    "name": "Upgrade",
+    "icon": "poo"
+  },
+  "options": {},
+  "attributes": {
+    "slot": {
+      "type": "component",
+      "repeatable": false,
+      "component": "cardshit.slot",
+      "required": true
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/updates",
+      "handler": "update.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/updates/count",
+      "handler": "update.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/updates/:id",
+      "handler": "update.findOne",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

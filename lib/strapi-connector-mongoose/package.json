@@ -1,0 +1,54 @@
+{
+  "name": "strapi-connector-mongoose",
+  "version": "3.0.1",
+  "description": "Mongoose hook for the Strapi framework",
+  "homepage": "http://strapi.io",
+  "keywords": [
+    "mongoose",
+    "hook",
+    "orm",
+    "nosql",
+    "strapi"
+  ],
+  "directories": {
+    "lib": "./lib"
+  },
+  "main": "./lib",
+  "dependencies": {
+    "lodash": "^4.17.11",
+    "mongoose": "^5.9.17",
+    "mongoose-float": "^1.0.4",
+    "mongoose-long": "^0.2.1",
+    "pluralize": "^7.0.0",
+    "semver": "^7.3.2",
+    "strapi-utils": "3.0.1"
+  },
+  "author": {
+    "email": "hi@strapi.io",
+    "name": "Strapi team",
+    "url": "http://strapi.io"
+  },
+  "maintainers": [
+    {
+      "name": "Strapi team",
+      "email": "hi@strapi.io",
+      "url": "http://strapi.io"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/strapi/strapi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/strapi/strapi/issues"
+  },
+  "engines": {
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"no tests yet\""
+  },
+  "gitHead": "5b64e05d7f565d359f28dccb9d9917124d1ad453"
+}

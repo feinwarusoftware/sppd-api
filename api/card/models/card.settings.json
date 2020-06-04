@@ -1,0 +1,183 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cards",
+  "info": {
+    "name": "Card"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "aliases": {
+      "type": "text"
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": true
+    },
+    "mana_cost": {
+      "type": "integer",
+      "required": true
+    },
+    "damage": {
+      "type": "integer",
+      "required": true
+    },
+    "health": {
+      "type": "integer",
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "character",
+        "spell",
+        "spawn",
+        "trap"
+      ],
+      "required": true
+    },
+    "character_type": {
+      "type": "enumeration",
+      "enum": [
+        "assassin",
+        "melee",
+        "tank",
+        "ranged",
+        "totem"
+      ]
+    },
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "adventure",
+        "mystical",
+        "scifi",
+        "fantasy",
+        "general",
+        "superhero"
+      ],
+      "required": true
+    },
+    "health_loss": {
+      "type": "integer"
+    },
+    "cast_area": {
+      "type": "enumeration",
+      "enum": [
+        "own_side",
+        "anywhere"
+      ],
+      "required": true
+    },
+    "max_velocity": {
+      "type": "float"
+    },
+    "time_to_reach_max_velocity": {
+      "type": "float"
+    },
+    "agro_range_multiplier": {
+      "type": "float"
+    },
+    "can_attack": {
+      "type": "boolean",
+      "required": true
+    },
+    "attack_range": {
+      "type": "float"
+    },
+    "pre_attack_delay": {
+      "type": "float"
+    },
+    "knockback": {
+      "type": "float"
+    },
+    "knockback_angle": {
+      "type": "float"
+    },
+    "time_between_attacks": {
+      "type": "float"
+    },
+    "has_aoe": {
+      "type": "boolean"
+    },
+    "aoe_type": {
+      "type": "enumeration",
+      "enum": [
+        "on_target",
+        "on_unit"
+      ],
+      "required": false
+    },
+    "aoe_damage_percentage": {
+      "type": "float"
+    },
+    "aoe_knockback_percentage": {
+      "type": "float"
+    },
+    "aoe_radius": {
+      "type": "float"
+    },
+    "min_episode_completed": {
+      "type": "integer",
+      "required": true
+    },
+    "min_pvp_rank": {
+      "type": "integer",
+      "required": true
+    },
+    "min_player_level": {
+      "type": "integer",
+      "required": true
+    },
+    "min_pvp_arena": {
+      "type": "integer",
+      "required": true
+    },
+    "character_tags": {
+      "type": "text"
+    },
+    "powers": {
+      "type": "component",
+      "repeatable": true,
+      "component": "cardshit.power",
+      "required": false
+    },
+    "upgrades": {
+      "type": "component",
+      "repeatable": true,
+      "component": "cardshit.upgrade",
+      "required": false,
+      "max": 69,
+      "min": 69
+    },
+    "levels": {
+      "type": "component",
+      "repeatable": true,
+      "component": "cardshit.level",
+      "required": true,
+      "max": 6,
+      "min": 6
+    },
+    "rarity": {
+      "type": "integer",
+      "min": 0,
+      "max": 3,
+      "required": true
+    }
+  }
+}
