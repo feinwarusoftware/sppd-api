@@ -21,7 +21,13 @@
         "power_attack_boost",
         "power_attack_decrease",
         "power_target",
-        "power_special"
+        "power_special",
+        "power_unlock",
+        "power_duration",
+        "power_range",
+        "stat_max_health",
+        "stat_damage",
+        "stat_charged_power_regen"
       ],
       "required": true
     },

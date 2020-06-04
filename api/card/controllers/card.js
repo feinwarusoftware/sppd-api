@@ -2,7 +2,7 @@
 
 const { sanitizeEntity } = require("strapi-utils");
 
-const { orderTable, deleteProps, deletePropsRet, deleteStrapiPropsRet } = require("../../../lib/utils");
+const { orderTable, deleteProps, deletePropsRet, deleteStrapiProps, deleteStrapiPropsRet } = require("../../../lib/utils");
 
 const DEFAULT_LIMIT = 12;
 const DEFAULT_PAGE = 0;
@@ -19,6 +19,9 @@ const mapLegacyCardProps = entity => {
   entity.image_url = entity.image.url;
   // entity.image overwritten after here!
   entity.image = entity.image.name;
+  if (entity.theme === "scifi") {
+    entity.theme = "sci-fi";
+  }
   // no optional chaning :cry:
   if (entity.character_tags != null) {
     entity.character_tags = entity.character_tags.split("\n");
@@ -27,7 +30,7 @@ const mapLegacyCardProps = entity => {
   // tech tree
   entity.tech_tree = {
     slots: entity.upgrades.map(upgrade => deleteStrapiPropsRet(upgrade.slot)),
-    levels: entity.levels.map(level => level.slots.map(slot => deleteStrapiPropsRet(slot))),
+    levels: entity.levels.map(level => ({ slots: level.slots.map(slot => deleteStrapiPropsRet(slot)) })),
   };
   entity.created_at = entity.createdAt;
   entity.updated_at = entity.updatedAt;
