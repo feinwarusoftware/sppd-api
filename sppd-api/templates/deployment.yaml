@@ -36,3 +36,19 @@ spec:
           initialDelaySeconds: 5
           periodSeconds: 5
           successThreshold: 1
+        env:
+        - name: MONGO_CERT
+          valueFrom:
+            secretKeyRef:
+              key: MONGO_CERT
+              name: "{{ .Release.Name }}-secret"
+        - name: MONGO_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: MONGO_HOST
+              name: "{{ .Release.Name }}-config"
+        - name: MONGO_DB
+          valueFrom:
+            configMapKeyRef:
+              key: MONGO_DB
+              name: "{{ .Release.Name }}-config"
