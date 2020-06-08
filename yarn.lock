@@ -8427,6 +8427,11 @@ strapi-plugin-email@3.0.1:
     strapi-provider-email-sendmail "3.0.1"
     strapi-utils "3.0.1"
 
+strapi-plugin-mongodb-files@^3.0.0-beta.20.2:
+  version "3.0.0-beta.20.2"
+  resolved "https://registry.yarnpkg.com/strapi-plugin-mongodb-files/-/strapi-plugin-mongodb-files-3.0.0-beta.20.2.tgz#25c0940cb5de19face2ba671335ab7830790fe2d"
+  integrity sha512-BjV2HR+nBxVj5e1s99vMoPPlPMfBmTgZPuiyHSKnWPa9oz223Kn7ThgToWDrTLiX0XpVus+MIJgnTu+P+4YvWA==
+
 strapi-plugin-upload@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/strapi-plugin-upload/-/strapi-plugin-upload-3.0.1.tgz#e9a42d372211f18c3fa769eadf40e7bd1a1267d2"
@@ -8495,6 +8500,11 @@ strapi-provider-upload-local@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/strapi-provider-upload-local/-/strapi-provider-upload-local-3.0.1.tgz#07c2a9c440bcdd6914b001e29bd364a6062f9d7b"
   integrity sha512-1UYsNgoYKkIbnjTOBg53OXPIUE45fTWhtMAe4npN6ALczh28wTlSEpUyrO1COBN1ApgYD6znNwulYjyvcFfExw==
+
+strapi-provider-upload-mongodb@^3.0.0-beta.20.5:
+  version "3.0.0-beta.20.5"
+  resolved "https://registry.yarnpkg.com/strapi-provider-upload-mongodb/-/strapi-provider-upload-mongodb-3.0.0-beta.20.5.tgz#0ed2768d497d917d0bae748f89d04b914308d837"
+  integrity sha512-alZgr4gQShX71kIuhFLG3pgP9OvZ2Vuip6OXh52HGu0fy9JNsa/iUZ6eBdj6hmZ9F9L/lSHzcvgU8GgoLdswew==
 
 strapi-utils@3.0.1:
   version "3.0.1"

@@ -1,0 +1,7 @@
+{
+  "provider": "mongodb",
+  "providerOptions": {
+    "collectionName": "fs",
+    "mongoDbFilesUploadDir": "files"
+  }
+}
