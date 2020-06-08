@@ -5,14 +5,16 @@
   "description": "SPPD REST API",
   "scripts": {
     "develop": "strapi develop",
-    "start": "strapi start",
-    "build": "strapi build",
+    "start": "cross-env NODE_ENV=production strapi start",
+    "build": "cross-env NODE_ENV=production strapi build",
     "strapi": "strapi",
+
     "lint": "echo add linting",
     "test": "echo add testing"
   },
   "devDependencies": {},
   "dependencies": {
+    "cross-env": "^7.0.2",
     "strapi": "3.0.1",
     "strapi-admin": "3.0.1",
     "strapi-connector-mongoose": "./lib/strapi-connector-mongoose/",
