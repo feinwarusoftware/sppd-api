@@ -2,7 +2,7 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/updates",
+      "path": "/api/v1/updates",
       "handler": "update.find",
       "config": {
         "policies": []
@@ -10,7 +10,7 @@
     },
     {
       "method": "GET",
-      "path": "/updates/count",
+      "path": "/api/v1/updates/count",
       "handler": "update.count",
       "config": {
         "policies": []
@@ -18,7 +18,7 @@
     },
     {
       "method": "GET",
-      "path": "/updates/:id",
+      "path": "/api/v1/updates/:id",
       "handler": "update.findOne",
       "config": {
         "policies": []

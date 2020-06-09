@@ -8,17 +8,34 @@ const DEFAULT_LIMIT = 12;
 const DEFAULT_PAGE = 0;
 const DEFAULT_ORDER = "asc";
 
+// idk lol
+const fallbackImages = [
+  {
+    name: "loli",
+    url: "/files/sy0nhblha9j21",
+  },
+  {
+    name: "OshinoShinobu",
+    url: "/files/OshinoShinobu",
+  },
+];
+
 // this isnt a pure fn, i dont give a shit ok
 const mapLegacyCardProps = entity => {
+  // idk lol
+  const fallbackImage = entity.rarity <= 1 ? fallbackImages[0] : fallbackImages[1];
+
   // transforms
   if (entity.aliases != null) {
     entity.aliases = entity.aliases.split("\n");
   } else {
     entity.aliases = [];
   }
-  entity.image_url = entity.image.url;
+
+  // image may not be set due to the nature of the import script
+  entity.image_url = (entity.image || { url: fallbackImage.url }).url;
   // entity.image overwritten after here!
-  entity.image = entity.image.name;
+  entity.image = (entity.image || { name: fallbackImage.name }).name;
   if (entity.theme === "scifi") {
     entity.theme = "sci-fi";
   }
@@ -161,6 +178,8 @@ module.exports = {
   },
 
   list: async () => {
+    const fallbackImage = entity.rarity <= 1 ? fallbackImages[0] : fallbackImages[1];
+
     const cards = await strapi
       .query("card").model
       .find({}, "_id name aliases image updatedAt")
@@ -169,9 +188,9 @@ module.exports = {
       .map(entity => {
         // transforms
         entity.aliases = entity.aliases.split("\n");
-        entity.image_url = entity.image.url;
+        entity.image_url = (entity.image || { url: fallbackImage.url }).url;
         // entity.image overwritten after here!
-        entity.image = entity.image.name;
+        entity.image = (entity.image || { name: fallbackImage.name }).name;
         entity.updated_at = entity.updatedAt;
         deleteProps(entity, ["id", "updatedAt", "powers", "upgrades", "levels", ""]);
 

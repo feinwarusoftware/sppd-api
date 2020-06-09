@@ -2,7 +2,7 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/cards",
+      "path": "/api/v1/cards",
       "handler": "card.find",
       "config": {
         "policies": []
@@ -10,7 +10,7 @@
     },
     {
       "method": "GET",
-      "path": "/cards/count",
+      "path": "/api/v1/cards/count",
       "handler": "card.count",
       "config": {
         "policies": []
@@ -18,7 +18,7 @@
     },
     {
       "method": "GET",
-      "path": "/cards/list",
+      "path": "/api/v1/cards/list",
       "handler": "card.list",
       "config": {
         "policies": []
@@ -26,7 +26,7 @@
     },
     {
       "method": "GET",
-      "path": "/cards/image/:image",
+      "path": "/api/v1/cards/image/:image",
       "handler": "card.image",
       "config": {
         "policies": []
@@ -34,7 +34,7 @@
     },
     {
       "method": "GET",
-      "path": "/cards/:id",
+      "path": "/api/v1/cards/:id",
       "handler": "card.findOne",
       "config": {
         "policies": []
@@ -42,7 +42,7 @@
     },
     {
       "method": "POST",
-      "path": "/cards",
+      "path": "/api/v1/cards",
       "handler": "card.create",
       "config": {
         "policies": []
