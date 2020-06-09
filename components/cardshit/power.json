@@ -27,7 +27,7 @@
     "amount": {
       "type": "float",
       "unique": false,
-      "required": true
+      "required": false
     },
     "duration": {
       "type": "float"

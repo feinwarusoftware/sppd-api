@@ -146,7 +146,7 @@
     },
     "min_pvp_arena": {
       "type": "integer",
-      "required": true
+      "required": false
     },
     "character_tags": {
       "type": "text"
