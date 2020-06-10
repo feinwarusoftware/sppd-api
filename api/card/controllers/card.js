@@ -1,8 +1,9 @@
 "use strict";
 
-const { sanitizeEntity } = require("strapi-utils");
+const { sanitizeEntity, convertRestQueryParams } = require("strapi-utils");
 
 const { orderTable, deleteProps, deletePropsRet, deleteStrapiProps, deleteStrapiPropsRet } = require("../../../lib/utils");
+const { applyQueryParams, buildWhereClause } = require("../../../lib/utils/buildQuery");
 
 const DEFAULT_LIMIT = 12;
 const DEFAULT_PAGE = 0;
@@ -46,8 +47,8 @@ const mapLegacyCardProps = entity => {
   entity.powers = entity.powers.map(power => deleteStrapiProps(power));
   // tech tree
   entity.tech_tree = {
-    slots: entity.upgrades.map(upgrade => deleteStrapiPropsRet(upgrade.slot)),
-    levels: entity.levels.map(level => ({ slots: level.slots.map(slot => deleteStrapiPropsRet(slot)) })),
+    slots: (entity.upgrades || []).map(upgrade => deleteStrapiPropsRet(upgrade.slot)),
+    levels: (entity.levels || []).map(level => ({ slots: level.slots.map(slot => deleteStrapiPropsRet(slot)) })),
   };
   entity.created_at = entity.createdAt;
   entity.updated_at = entity.updatedAt;
@@ -113,9 +114,44 @@ module.exports = {
 
     mapLegacyCardQuery(query);
 
+    // this will kinda do for now, i dont imagine ill be using strapi in the future anyway
+    // const [cards, count, total] = await Promise.all([
+    //   strapi.services.card
+    //     .find(query)
+    //     .then(entities => entities
+    //       .map(entity => /*deletePropsRet(mapLegacyCardProps*(*/sanitizeEntity(entity, { model: strapi.models.card })), ["tech_tree"]/*))*/),
+    //   // strapi.services.card
+    //   //   .count(query),
+    //   // strapi.services.card
+    //   //   .count({}),
+    // ]);
+
+    //
+    const filters = convertRestQueryParams(query);
+
+    const { where = [] } = filters;
+    // deleteProps(filters, ["sort", "start", "limit", "select"]);
+
+    const wheres = where.map(buildWhereClause);
+    const findCriteria = wheres.length > 0 ? { $and: wheres } : {};
+  
+    // console.log("--- console.log debugging ---", model, filters);
+  
+    let mongoQuery = strapi
+      .query("card").model
+      .find(findCriteria)
+      .select("-levels -upgrades");
+    mongoQuery = applyQueryParams({ query: mongoQuery, filters });
+
+    // console.log(query, filters, findCriteria);
+
+    // let cards, count, total;
+    // cards = await mongoQuery
+    //   .then(entities => entities
+    //     .map(entity => sanitizeEntity(entity, { model: strapi.models.card })));
+
     const [cards, count, total] = await Promise.all([
-      strapi.services.card
-        .find(query)
+      mongoQuery
         .then(entities => entities
           .map(entity => deletePropsRet(mapLegacyCardProps(sanitizeEntity(entity, { model: strapi.models.card })), ["tech_tree"]))),
       strapi.services.card
@@ -135,6 +171,12 @@ module.exports = {
         cards,
       },
     };
+
+    // return {
+    //   cards,
+    //   count,
+    //   total,
+    // };
   },
 
   count: async ctx => {
@@ -178,24 +220,25 @@ module.exports = {
   },
 
   list: async () => {
-    const fallbackImage = entity.rarity <= 1 ? fallbackImages[0] : fallbackImages[1];
-
     const cards = await strapi
       .query("card").model
       .find({}, "_id name aliases image updatedAt")
       .then(entities => entities
-      .map(entity => sanitizeEntity(entity, { model: strapi.models.card }))
-      .map(entity => {
-        // transforms
-        entity.aliases = entity.aliases.split("\n");
-        entity.image_url = (entity.image || { url: fallbackImage.url }).url;
-        // entity.image overwritten after here!
-        entity.image = (entity.image || { name: fallbackImage.name }).name;
-        entity.updated_at = entity.updatedAt;
-        deleteProps(entity, ["id", "updatedAt", "powers", "upgrades", "levels", ""]);
+        .map(entity => sanitizeEntity(entity, { model: strapi.models.card }))
+        .map(entity => {
+          // idk lol
+          const fallbackImage = entity.rarity <= 1 ? fallbackImages[0] : fallbackImages[1];
 
-        return entity;
-      }));
+          // transforms
+          entity.aliases = entity.aliases.split("\n");
+          entity.image_url = (entity.image || { url: fallbackImage.url }).url;
+          // entity.image overwritten after here!
+          entity.image = (entity.image || { name: fallbackImage.name }).name;
+          entity.updated_at = entity.updatedAt;
+          deleteProps(entity, ["id", "updatedAt", "powers", "upgrades", "levels", ""]);
+
+          return entity;
+        }));
 
     return {
       code: 200,
