@@ -14,7 +14,7 @@
   "devDependencies": {},
   "dependencies": {
     "cross-env": "^7.0.2",
-    "strapi": "3.0.1",
+    "strapi": "3.6.8",
     "strapi-admin": "3.0.1",
     "strapi-connector-mongoose": "./lib/strapi-connector-mongoose/",
     "strapi-plugin-content-manager": "3.0.1",
